@@ -1,28 +1,24 @@
+import { useState } from 'react';
 import './App.css';
+import CategoryList from './components/CategoryList';
+import TaskList from './components/TaskList';
 
 function App() {
+  const [categories, setCategories] = useState([]);
+  const [tasks, setTasks] = useState([]);
+
+  const addCategory = (category) => {
+    setCategories([...categories, category]);
+  };
+
+  const addTask = (task) => {
+    setTasks([...tasks, task]);
+  };
+
   return (
     <div className="App">
-      <div className="sidebar">
-        <h2>Categories</h2>
-        <div className="input-section">
-          <input type="text" id="categoryInput" placeholder="New category..." />
-          <button id="addCategoryBtn">+</button>
-        </div>
-        <ul id="categoryList">
-          <li className="category-item">Hobbies</li>
-        </ul>
-      </div>
-      <div className="container">
-        <h1>To Do List</h1>
-        <div className="input-section">
-          <input type="text" id="taskInput" placeholder="Add a new task..." />
-          <button id="addTaskBtn">Add</button>
-        </div>
-        <ul id="taskList">
-          <li className="task-item">Make a game</li>
-        </ul>
-      </div>
+      <CategoryList categories={categories} addCategory={addCategory} />
+      <TaskList tasks={tasks} addTask={addTask} />
     </div>
   );
 }
