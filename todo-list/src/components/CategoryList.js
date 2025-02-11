@@ -1,7 +1,6 @@
-import React from 'react';
 import './CategoryList.css';
 
-function CategoryList({ categories}) {
+function CategoryList({ categories }) {
 
   return (
     <div className="sidebar">
