@@ -1,27 +1,14 @@
-import { useState } from 'react';
+import React from 'react';
 import './CategoryList.css';
 
-function CategoryList({ categories, addCategory }) {
-  const [newCategory, setNewCategory] = useState('');
-
-  const handleAddCategory = () => {
-    if (newCategory.trim()) {
-      addCategory(newCategory.trim());
-      setNewCategory('');
-    }
-  };
+function CategoryList({ categories}) {
 
   return (
     <div className="sidebar">
       <h2>Categories</h2>
       <div className="input-section">
-        <input
-          type="text"
-          value={newCategory}
-          onChange={(e) => setNewCategory(e.target.value)}
-          placeholder="New category..."
-        />
-        <button onClick={handleAddCategory}>+</button>
+        <input type="text" placeholder="New category..." />
+        <button>+</button>
       </div>
       <ul>
         {categories.map((category, index) => (

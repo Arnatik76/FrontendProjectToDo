@@ -1,24 +1,15 @@
-import { useState } from 'react';
 import './App.css';
 import CategoryList from './components/CategoryList';
 import TaskList from './components/TaskList';
 
 function App() {
-  const [categories, setCategories] = useState([]);
-  const [tasks, setTasks] = useState([]);
-
-  const addCategory = (category) => {
-    setCategories([...categories, category]);
-  };
-
-  const addTask = (task) => {
-    setTasks([...tasks, task]);
-  };
+  const categories = ["Hobbies", "Education"]
+  const tasks = ["Make a game", "Learn Economics"]
 
   return (
     <div className="App">
-      <CategoryList categories={categories} addCategory={addCategory} />
-      <TaskList tasks={tasks} addTask={addTask} />
+      <CategoryList categories={categories} />
+      <TaskList tasks={tasks} />
     </div>
   );
 }
