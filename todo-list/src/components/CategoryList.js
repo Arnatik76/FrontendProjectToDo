@@ -1,16 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './CategoryList.css';
 
-function CategoryList({ categories, setCategories }) {
-  const [newCategory, setNewCategory] = useState('');
-
-  const handleAddCategory = () => {
-    if (newCategory.trim() !== '') {
-      setCategories([...categories, newCategory]);
-      setNewCategory('');
-    }
-  };
-
+function CategoryList({ categories, newCategory, setNewCategory, handleAddCategory }) {
   return (
     <div className="sidebar">
       <h2>Categories</h2>

@@ -1,16 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './TaskList.css';
 
-function TaskList({ tasks, setTasks }) {
-  const [newTask, setNewTask] = useState('');
-
-  const handleAddTask = () => {
-    if (newTask.trim() !== '') {
-      setTasks([...tasks, newTask]);
-      setNewTask('');
-    }
-  };
-
+function TaskList({ tasks, newTask, setNewTask, handleAddTask }) {
   return (
     <div className="task-list">
       <h1>To Do List</h1>
