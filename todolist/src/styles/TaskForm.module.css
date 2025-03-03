@@ -1,0 +1,42 @@
+.taskForm {
+  display: flex;
+  gap: 10px;
+  margin: 20px;
+}
+
+.dark {
+  color: white;
+}
+
+.taskForm input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: var(--task-bg);
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.taskForm input.dark {
+  border: 1px solid #555;
+  background: #222;
+  color: white;
+}
+
+.taskForm button {
+  background: var(--task-bg, #333);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+.taskForm button.dark {
+  color: white;
+}
+
+.taskForm button:hover {
+  opacity: 0.8;
+}

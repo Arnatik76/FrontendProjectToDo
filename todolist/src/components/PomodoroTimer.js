@@ -1,65 +1,55 @@
 import React, { Component } from 'react';
-import './PomodoroTimer.css';
+import styles from '../styles/PomodoroTimer.module.css';
 
 class PomodoroTimer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: 5, // Начальное время в секундах
+      time: 5,
       isRunning: false,
-      mode: 'work' // Режим: work или break
+      mode: 'work',
     };
+    this.timer = null;
   }
 
-  componentDidMount() {
-    this.setupTimer();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.isRunning !== this.state.isRunning || prevState.time !== this.state.time) {
-      this.setupTimer();
-    }
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
-
-  setupTimer = () => {
-    clearInterval(this.timer);
-    if (this.state.isRunning && this.state.time > 0) {
-      this.timer = setInterval(() => {
-        this.setState(prevState => ({
-          time: prevState.time - 1
-        }));
+  runTimer = () => {
+    if (this.state.isRunning) {
+      this.timer = setTimeout(() => {
+        if (this.state.time > 0) {
+          this.setState({ time: this.state.time - 1 }, this.runTimer);
+        } else {
+          this.switchMode(); // Автоматически переходит в другой режим
+        }
       }, 1000);
-    } else if (this.state.time === 0) {
-      this.switchMode();
-      clearInterval(this.timer);
     }
   };
 
   startTimer = () => {
-    this.setState({ isRunning: true });
+    if (!this.state.isRunning) {
+      this.setState({ isRunning: true }, this.runTimer);
+    }
   };
 
   stopTimer = () => {
+    clearTimeout(this.timer);
     this.setState({ isRunning: false });
   };
 
   resetTimer = () => {
-    this.setState({
-      isRunning: false,
-      time: this.state.mode === 'work' ? 5 : 10
-    });
+    this.stopTimer();
+    this.setState({ time: this.state.mode === 'work' ? 5 : 10 });
   };
 
   switchMode = () => {
-    this.setState(prevState => ({
-      isRunning: false,
+    this.stopTimer(); // Останавливаем таймер перед сменой режима
+
+    this.setState((prevState) => ({
       mode: prevState.mode === 'work' ? 'break' : 'work',
-      time: prevState.mode === 'work' ? 10 : 5
-    }));
+      time: prevState.mode === 'work' ? 10 : 5,
+      isRunning: true, // Автоматически продолжаем таймер
+    }), this.runTimer);
+
+    this.props.onModeChange(this.state.mode === 'work');
   };
 
   formatTime = (seconds) => {
@@ -69,18 +59,13 @@ class PomodoroTimer extends Component {
   };
 
   render() {
-    const { mode, time, isRunning } = this.state;
     return (
-      <div className="pomodoro">
-        <h2>{mode === 'work' ? 'Работа' : 'Отдых'}</h2>
-        <h1>{this.formatTime(time)}</h1>
-        <div className="buttons">
-          <button onClick={this.startTimer} disabled={isRunning}>
-            Старт
-          </button>
-          <button onClick={this.stopTimer} disabled={!isRunning}>
-            Стоп
-          </button>
+      <div className={`${styles.pomodoro} ${this.props.isDark ? styles.dark : ''}`}>
+        <h2>{this.state.mode === 'work' ? 'Работа' : 'Отдых'}</h2>
+        <h1>{this.formatTime(this.state.time)}</h1>
+        <div className={styles.buttons}>
+          <button onClick={this.startTimer} disabled={this.state.isRunning}>Старт</button>
+          <button onClick={this.stopTimer}>Стоп</button>
           <button onClick={this.resetTimer}>Сброс</button>
         </div>
       </div>

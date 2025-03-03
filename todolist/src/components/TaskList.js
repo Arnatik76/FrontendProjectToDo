@@ -1,15 +1,17 @@
 import Task from './Task';
-import './TaskList.css';
+import styles from '../styles/TaskList.module.css';
 
-function TaskList({ tasks, deleteTask, editTask }) {
+function TaskList({ tasks, deleteTask, editTask, toggleStatus, isBreak }) {
   return (
-    <ul className="task-list">
-      {tasks.map((task, index) => (
+    <ul className={styles.taskList}>
+      {tasks.map(task => (
         <Task 
-          key={index} 
+          key={task.id} 
           task={task} 
-          onDelete={() => deleteTask(index)}
-          onEdit={() => editTask(index)}
+          onDelete={() => deleteTask(task.id)}
+          onEdit={(newText) => editTask(task.id, newText)}
+          onToggleStatus={() => toggleStatus(task.id)}
+          isBreak={isBreak}
         />
       ))}
     </ul>

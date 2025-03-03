@@ -1,0 +1,75 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  gap: 20px;
+  flex-direction: row;
+  align-content: flex-start;
+}
+
+.containerTimer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-width: 400px;
+  align-items: center;
+}
+
+.containerTodo {
+  flex: 2;
+  max-width: 600px;
+  text-align: center;
+  background: var(--div-bg, #f0f0f0);
+  border-radius: 10px;
+}
+
+.containerTodo select {
+  padding: 10px;
+  color: var(--text-color);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  background: var(--task-bg, #f0f0f0);
+}
+
+.themeToggle {
+  margin: 10px 0;
+  padding: 10px;
+  border: none;
+  color: var(--theme-text-color, #f0f0f0);
+  background: var(--theme-btn-bg, #333);
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.themeToggle:hover {
+  opacity: 0.8;
+}
+
+.searchInput {
+  flex: 1;
+  width: auto;
+  padding: 10px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: var(--task-bg);
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.darkTheme {
+  --bg-color: #121212;
+  --text-color: white;
+  --task-bg: #282525;
+  --input_bf: #333;
+  --div-bg: #333;
+  --theme-btn-bg: #f0f0f0;
+  --theme-text-color: #333;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}

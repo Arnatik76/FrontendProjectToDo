@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import './TaskForm.css';
+import styles from '../styles/TaskForm.module.css';
 
-function TaskForm({ addTask }) {
+function TaskForm({ addTask, isDark }) {
   const [task, setTask] = useState('');
 
   const handleSubmit = (e) => {
@@ -13,14 +13,15 @@ function TaskForm({ addTask }) {
   };
 
   return (
-    <form className="task-form" onSubmit={handleSubmit}>
+    <form className={`${styles.taskForm} ${isDark ? styles.dark : ''}`} onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Введите задачу..."
         value={task}
         onChange={(e) => setTask(e.target.value)}
+        className={isDark ? styles.dark : ''}
       />
-      <button type="submit">Добавить</button>
+      <button type="submit" className={isDark ? styles.dark : ''}>Добавить</button>
     </form>
   );
 }

@@ -1,0 +1,46 @@
+.pomodoro {
+  text-align: center;
+  padding: 20px;
+  background: var(--div-bg, #f0f0f0);
+  border-radius: 10px;
+  transition: background 0.3s ease-in-out;
+}
+
+.light {
+  background: #c4c4c4;
+  color: #333;
+}
+
+.dark {
+  background: #333;
+  color: white;
+}
+
+
+.pomodoro h2 {
+  margin-bottom: 10px;
+}
+
+.pomodoro h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.buttons button {
+  color: white;
+  background-color: var(--task-bg, #333);
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.buttons button:hover {
+  opacity: 0.8;
+}
