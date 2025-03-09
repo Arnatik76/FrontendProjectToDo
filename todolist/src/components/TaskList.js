@@ -1,7 +1,7 @@
 import Task from './Task';
 import styles from '../styles/TaskList.module.css';
 
-function TaskList({ tasks, deleteTask, editTask, toggleStatus, isBreak }) {
+function TaskList({ tasks, deleteTask, editTask, toggleStatus, toggleTaskBreakMode, isDark }) {
   return (
     <ul className={styles.taskList}>
       {tasks.map(task => (
@@ -11,7 +11,8 @@ function TaskList({ tasks, deleteTask, editTask, toggleStatus, isBreak }) {
           onDelete={() => deleteTask(task.id)}
           onEdit={(newText) => editTask(task.id, newText)}
           onToggleStatus={() => toggleStatus(task.id)}
-          isBreak={isBreak}
+          onBreakModeChange={(isBreak) => toggleTaskBreakMode(task.id, isBreak)}
+          isDark={isDark}
         />
       ))}
     </ul>

@@ -2,14 +2,12 @@ import { useState, useEffect } from 'react';
 import styles from './styles/App.module.css';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
-import PomodoroTimer from './components/PomodoroTimer';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
-  const [isDark, setIsDark] = useState(() => localStorage.getItem('theme') === 'dark'); // ✅ Загружаем тему сразу
-  const [isBreak, setIsBreak] = useState(false);
+  const [isDark, setIsDark] = useState(() => localStorage.getItem('theme') === 'dark');
 
   useEffect(() => {
     const savedTasks = localStorage.getItem('tasks');
@@ -20,6 +18,7 @@ function App() {
             id: task.id || Date.now() + Math.random(),
             text: typeof task.text === 'string' ? task.text : 'Без названия',
             status: task.status || 'in-progress',
+            isBreak: task.isBreak || false
           })));
         } else {
           setTasks([]);
@@ -36,7 +35,7 @@ function App() {
   }, [tasks]);
 
   useEffect(() => {
-    if (isDark !== undefined) { // ✅ Проверяем, что isDark определён
+    if (isDark !== undefined) {
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
       document.body.classList.toggle(styles.darkTheme, isDark);
     }
@@ -53,6 +52,7 @@ function App() {
       id: Date.now(),
       text: newTask.trim(),
       status: 'in-progress',
+      isBreak: false
     };
 
     setTasks(prevTasks => [...prevTasks, newTaskObject]);
@@ -76,20 +76,26 @@ function App() {
     ));
   };
 
+  const toggleTaskBreakMode = (taskId, isBreak) => {
+    setTasks(prevTasks => prevTasks.map(task =>
+      task.id === taskId ? { ...task, isBreak } : task
+    ));
+  };
+
   const filteredTasks = tasks
     .filter(task => typeof task.text === 'string' && task.text.toLowerCase().includes(searchTerm.toLowerCase()))
     .filter(task => filterStatus === 'all' || task.status === filterStatus);
 
   return (
     <div className={styles.container}>
-      <div className={styles.containerTimer}>
-        <PomodoroTimer isDark={isDark} onModeChange={setIsBreak} />
-        <button className={styles.themeToggle} onClick={toggleTheme}>
-          {isDark ? '🌞 Светлая' : '🌙 Тёмная'}
-        </button>
-      </div>
       <div className={styles.containerTodo}>
-        <h1>To-Do List</h1>
+        <div className={styles.header}>
+          <h1>To-Do List</h1>
+          <button className={styles.themeToggle} onClick={toggleTheme}>
+            {isDark ? '🌞 Светлая' : '🌙 Тёмная'}
+          </button>
+        </div>
+        
         <input
           type="text"
           placeholder="🔍 Поиск задач..."
@@ -104,13 +110,14 @@ function App() {
           <option value="completed">Выполнено</option>
         </select>
 
-        <TaskForm addTask={addTask} />
+        <TaskForm addTask={addTask} isDark={isDark} />
         <TaskList 
           tasks={filteredTasks} 
           deleteTask={deleteTask} 
           editTask={editTask} 
           toggleStatus={toggleStatus} 
-          isBreak={isBreak} 
+          toggleTaskBreakMode={toggleTaskBreakMode}
+          isDark={isDark}
         />
       </div>
     </div>

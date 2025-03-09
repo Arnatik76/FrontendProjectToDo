@@ -1,42 +1,45 @@
 .taskForm {
   display: flex;
-  gap: 10px;
   margin: 20px;
-}
-
-.dark {
-  color: white;
+  gap: 10px;
 }
 
 .taskForm input {
   flex: 1;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  background: var(--task-bg);
-  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-
-.taskForm input.dark {
-  border: 1px solid #555;
-  background: #222;
-  color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: white;
+  color: #333;
 }
 
 .taskForm button {
-  background: var(--task-bg, #333);
+  padding: 10px 15px;
+  background-color: #3498db;
   color: white;
   border: none;
-  padding: 10px;
-  cursor: pointer;
   border-radius: 5px;
-  transition: background 0.3s ease-in-out;
-}
-
-.taskForm button.dark {
-  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
 }
 
 .taskForm button:hover {
-  opacity: 0.8;
+  background-color: #2980b9;
+}
+
+.taskForm.dark input {
+  background-color: #444;
+  color: #f0f0f0;
+  border-color: #555;
+}
+
+.taskForm.dark button {
+  background-color: #34495e;
+}
+
+.taskForm.dark button:hover {
+  background-color: #2c3e50;
 }

@@ -1,9 +1,16 @@
 .pomodoro {
+  display: flex;
   text-align: center;
-  padding: 20px;
+  padding: 10px;
   background: var(--div-bg, #f0f0f0);
-  border-radius: 10px;
-  transition: background 0.3s ease-in-out;
+  border-radius: 5px;
+  transition: background-color 0.3sease, color 0.3sease;
+  margin-top: 10px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .light {
@@ -12,35 +19,74 @@
 }
 
 .dark {
-  background: #333;
-  color: white;
+  background-color: #2c3e50;
+  color: #ecf0f1;
 }
 
-
-.pomodoro h2 {
-  margin-bottom: 10px;
+.workMode {
+  background-color: rgba(52, 152, 219, 0.2);
 }
 
-.pomodoro h1 {
-  font-size: 3em;
-  margin-bottom: 10px;
+.dark.workMode {
+  background-color: rgba(52, 152, 219, 0.3);
+}
+
+.breakMode {
+  background-color: rgba(46, 204, 113, 0.2);
+}
+
+.dark.breakMode {
+  background-color: rgba(46, 204, 113, 0.3);
+}
+
+.modeIndicator {
+  font-size: 1rem;
+  margin: 0 0 5px 0;
+  font-weight: bold;
 }
 
 .buttons {
   display: flex;
   gap: 10px;
-  justify-content: center;
+  margin-top: 10px;
+  flex-direction: column;
 }
 
 .buttons button {
   color: white;
-  background-color: var(--task-bg, #333);
+  background-color: #3498db;
   border: none;
-  padding: 10px 15px;
+  padding: 5px 10px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 3px;
+  transition: background-color 0.2s;
 }
 
 .buttons button:hover {
-  opacity: 0.8;
+  background-color: #2980b9;
+}
+
+.buttons button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+.dark .buttons button {
+  background-color: #34495e;
+}
+
+.dark .buttons button:hover {
+  background-color: #2c3e50;
+}
+
+.dark .buttons button:disabled {
+  background-color: #596a7b;
+}
+
+.timer {
+  padding: 10px;
+}
+
+.timer h1 {
+  margin: 0;
 }
