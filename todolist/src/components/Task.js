@@ -69,7 +69,7 @@ function Task({ task, onDelete, onEdit, onToggleStatus, onBreakModeChange, isDar
           isDark={isDark} 
           isBreak={task.isBreak}
           onModeChange={onBreakModeChange}
-          allowTimerControl={true} // Always allow timer control
+          allowTimerControl={true}
         />
       )}
     </li>
